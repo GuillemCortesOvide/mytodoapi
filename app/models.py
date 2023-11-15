@@ -24,4 +24,3 @@ def create_database():
         "completed": bool
     })
 
-    db.close()

@@ -1,13 +1,57 @@
+# db_operations.py
 from sqlite_utils import Database
+from pydantic import BaseModel
 
-def get_user_by_id(user_id):
+# Assuming your database file is named 'your_database.db'
+db = Database("my_todo.db")
 
-    db = Database("my_todo.db")  # Connect to the database
+class DatabaseManager:
+    def __init__(self, db_file="your_database.db"):
+        self.db_file = db_file
+        self.db = None
 
-    user = db["users"].get(user_id=user_id)  # Query the database for the user
+    def get_db(self):
+        if self.db is None:
+            self.db = Database(self.db_file)
+        return self.db
 
-    db.close()  # Close the connection
+    def close_db(self):
+        if self.db is not None:
+            self.db.close()
+            self.db = None
 
-    return user
+# Create a single instance of DatabaseManager
+db_manager = DatabaseManager()
 
+class User(BaseModel):
+    username: str
+    email: str
+    password: str
 
+def insert_user(user: User):
+    try:
+        db = db_manager.get_db()
+        # Insert user into the 'users' table
+        user_id = db["users"].insert({
+            "username": user.username,
+            "email": user.email,
+            "password": user.password
+        })["id"]
+
+        # Insert a todo list for the user
+        db["todo_lists"].insert({
+            "user_id": user_id,
+            "title": f"{user.username}'s Todo List"
+        })
+
+        # Commit the transaction
+        db.commit()
+        return {"message": "User inserted successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        db_manager.close_db()
+    
+
+def close_db_connection():
+    db.close()

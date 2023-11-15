@@ -1,18 +1,24 @@
-from fastapi import APIRouter
-from db_operations import get_user_by_id
+# routers.py
+from fastapi import APIRouter, Depends, HTTPException
+from sqlite_utils import Database
+from pydantic import BaseModel
 
 router = APIRouter()
 
-@router.post("/users/")
-def create_user(user_data: dict):
-    pass
+class UserCreate(BaseModel):
+    username: str
+    email: str
+    password: str
 
-@router.get("/users/{user_id}")
-def get_user(user_id: int):
-    user = get_user_by_id(user_id)  # Call the function to fetch user from the database
-
-    if user is not None:
-        return {"user": user}
-    else:
-        return {"message": "User not found"}, 404
-
+@router.post("/users/", response_model=dict)
+def insert_user(user_data: UserCreate):
+    try:
+        with Database("my_todo.db") as db:
+            db["users"].insert({
+                "username": user_data.username,
+                "email": user_data.email,
+                "password": user_data.password
+            })
+        return {"message": "User created successfully"}
+    except Exception as e:
+        return {"error": str(e)}, 500  # Return an error message and status code 500
