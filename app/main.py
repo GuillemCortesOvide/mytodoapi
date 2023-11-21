@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi.responses import JSONResponse
 from app.routers import router
 from app.db_operations import insert_user, User, close_db_connection, DatabaseManager 
 from app.db_operations import BaseModel
@@ -18,13 +19,15 @@ def get_db_dependency():
         db_manager.close_db()
 
 @app.post("/users", status_code=status.HTTP_201_CREATED)
-def create_user(user: User, db: DatabaseManager = Depends(get_db_dependency)):
+def create_user(user: User):
     try:
         result = insert_user(db, user)
         if "error" in result:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal Server Error")
-        return {"message": "User created successfully"}
+        
+        return JSONResponse(content={"message": "User created successfully"}, status_code=status.HTTP_201_CREATED)
     except Exception as e:
+        logging.exception(f"Error creating user: {str(e)}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal Server Error")
     finally:
         close_db_connection()

@@ -2,11 +2,11 @@
 from sqlite_utils import Database
 from pydantic import BaseModel
 
-# Assuming your database file is named 'your_database.db'
+
 db = Database("my_todo.db")
 
 class DatabaseManager:
-    def __init__(self, db_file="your_database.db"):
+    def __init__(self, db_file="my_todo.db"):
         self.db_file = db_file
         self.db = None
 
@@ -28,7 +28,7 @@ class User(BaseModel):
     email: str
     password: str
 
-def insert_user(user: User):
+def insert_user(db, user):
     try:
         db = db_manager.get_db()
         # Insert user into the 'users' table
