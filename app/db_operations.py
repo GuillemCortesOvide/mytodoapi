@@ -1,57 +1,57 @@
 # db_operations.py
-from sqlite_utils import Database
 from pydantic import BaseModel
+import sqlite3
 
+conn = sqlite3.connect('my_todo.db')
+cursor = conn.cursor()
 
-db = Database("my_todo.db")
-
-class DatabaseManager:
-    def __init__(self, db_file="my_todo.db"):
-        self.db_file = db_file
-        self.db = None
-
-    def get_db(self):
-        if self.db is None:
-            self.db = Database(self.db_file)
-        return self.db
-
-    def close_db(self):
-        if self.db is not None:
-            self.db.close()
-            self.db = None
-
-# Create a single instance of DatabaseManager
-db_manager = DatabaseManager()
 
 class User(BaseModel):
     username: str
     email: str
     password: str
 
-def insert_user(db, user):
+
+class UserId(BaseModel):
+    id: int
+
+
+def insert_user(user, db):
+
     try:
-        db = db_manager.get_db()
         # Insert user into the 'users' table
-        user_id = db["users"].insert({
+        new_user = db["users"].insert({
             "username": user.username,
             "email": user.email,
             "password": user.password
-        })["id"]
-
-        # Insert a todo list for the user
-        db["todo_lists"].insert({
-            "user_id": user_id,
-            "title": f"{user.username}'s Todo List"
         })
 
-        # Commit the transaction
-        db.commit()
-        return {"message": "User inserted successfully"}
+        return {"message": "User created successfully"}
     except Exception as e:
         return {"error": str(e)}
-    finally:
-        db_manager.close_db()
-    
 
-def close_db_connection():
-    db.close()
+
+def delete_user(user, db):
+    try:
+        # Delete user from the 'users' table
+        db["users"].delete(
+            id=user.user_id,
+        )
+
+        return {"message": "User deleted successfully"}
+    except Exception as e:
+        print(f"Error deleting user: {e}")
+        return {"error": str(e)}
+
+
+
+'''By default SQLite will only allow one thread to communicate with it, assuming that each thread would handle an 
+    independent request.
+
+This is to prevent accidentally sharing the same connection for different things (for different requests).
+
+But in FastAPI, using normal functions (def) more than one thread could interact with the database for the same request,
+ so we need to make SQLite know that it should allow that with connect_args={"check_same_thread": False}.
+
+Also, we will make sure each request gets its own database connection session in a dependency, so there's no need for
+ that default mechanism.'''
