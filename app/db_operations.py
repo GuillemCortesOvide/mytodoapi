@@ -2,6 +2,7 @@
 from pydantic import BaseModel
 import sqlite3
 
+
 conn = sqlite3.connect('my_todo.db')
 cursor = conn.cursor()
 
@@ -12,36 +13,17 @@ class User(BaseModel):
     password: str
 
 
-class UserId(BaseModel):
-    id: int
+class ToDo(BaseModel):
+    user_id: int
+    title: str
 
 
-def insert_user(user, db):
-
-    try:
-        # Insert user into the 'users' table
-        new_user = db["users"].insert({
-            "username": user.username,
-            "email": user.email,
-            "password": user.password
-        })
-
-        return {"message": "User created successfully"}
-    except Exception as e:
-        return {"error": str(e)}
 
 
-def delete_user(user, db):
-    try:
-        # Delete user from the 'users' table
-        db["users"].delete(
-            id=user.user_id,
-        )
 
-        return {"message": "User deleted successfully"}
-    except Exception as e:
-        print(f"Error deleting user: {e}")
-        return {"error": str(e)}
+
+
+
 
 
 
