@@ -14,7 +14,6 @@ class User(BaseModel):
 
 
 class ToDo(BaseModel):
-    user_id: int
     title: str
 
 

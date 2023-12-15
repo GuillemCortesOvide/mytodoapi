@@ -68,21 +68,36 @@ def delete_user(id: int):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-@app.post("/todo-list/{id}", status_code=status.HTTP_201_CREATED)
-def create_todo_list(list: ToDo):
+@app.post("/todo-lists/{id}", status_code=status.HTTP_201_CREATED)
+def create_todo_list(id: int, user: ToDo):
+    try:
+        with sqlite3.connect('my_todo.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO todo_lists (user_id, title) VALUES (?, ?)", [id, user.title])
+            conn.commit()
+
+        return JSONResponse(content={"message": "List inserted successfully"}, status_code=status.HTTP_201_CREATED)
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(id: int):
     try:
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO todo_lists (username, title) VALUES (?, ?)", [list.username, list.title])
+        # Assuming 'id' is the primary key for the 'users' table
+        cursor.execute("DELETE FROM todo_lists WHERE user_id = ?", [id])
         conn.commit()
         conn.close()
 
-        return JSONResponse(content={"message": "List inserted successfully"}, status_code=status.HTTP_201_CREATED)
-
-    except Exception as e:
+    except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
 @app.get("/todo-lists", status_code=status.HTTP_200_OK)
@@ -100,6 +115,7 @@ def get_all_todo_lists():
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @app.get("/todo/{id}")
 def read_user_tasks(user_id: int):
