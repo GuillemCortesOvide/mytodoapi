@@ -3,9 +3,7 @@ from fastapi.responses import JSONResponse
 from app.db_operations import User, BaseModel, ToDo
 import sqlite3
 from sqlite_utils import Database
-
 import hashlib
-
 
 
 
@@ -121,7 +119,7 @@ def get_all_todo_lists():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-=======
+
 def hash_password(password: str) -> str:
 
     hash_algorithm = hashlib.sha256()
@@ -234,7 +232,7 @@ def get_all_todo_lists():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
->>>>>>> main
+
 
 @app.get("/todo/{id}")
 def read_user_tasks(user_id: int):
