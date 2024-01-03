@@ -4,6 +4,10 @@ from app.db_operations import User, BaseModel, ToDo
 import sqlite3
 from sqlite_utils import Database
 
+import hashlib
+
+
+
 
 db = Database("my_todo.db")
 app = FastAPI()
@@ -14,6 +18,7 @@ def get_db():
         cursor = connection.cursor()
         yield cursor
         connection.commit()
+
 
 
 @app.get("/users", status_code=status.HTTP_200_OK)
@@ -116,6 +121,120 @@ def get_all_todo_lists():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+=======
+def hash_password(password: str) -> str:
+
+    hash_algorithm = hashlib.sha256()
+    hash_algorithm.update(password.encode('utf-8'))
+    hashed_password = hash_algorithm.hexdigest()
+
+    return hashed_password
+
+
+@app.get("/users", status_code=status.HTTP_200_OK)
+def get_users():
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users")
+        users = cursor.fetchall()
+        conn.close()
+
+        return JSONResponse(content={"users": users}, status_code=status.HTTP_200_OK)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@app.post("/users", status_code=status.HTTP_201_CREATED)
+def create_user(user: User):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        hashed_password = hash_password(user.password)
+
+
+        cursor.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [user.username, user.email, hashed_password])
+        conn.commit()
+        conn.close()
+
+        return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@app.delete("/users/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(id: int):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        # Assuming 'id' is the primary key for the 'users' table
+        cursor.execute("DELETE FROM users WHERE id = ?", [id])
+        conn.commit()
+        conn.close()
+
+    except sqlite3.Error as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@app.post("/todo-lists/{id}", status_code=status.HTTP_201_CREATED)
+def create_todo_list(id: int, user: ToDo):
+    try:
+        with sqlite3.connect('my_todo.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO todo_lists (user_id, title) VALUES (?, ?)", [id, user.title])
+            conn.commit()
+
+        return JSONResponse(content={"message": "List inserted successfully"}, status_code=status.HTTP_201_CREATED)
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(id: int):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        # Assuming 'id' is the primary key for the 'users' table
+        cursor.execute("DELETE FROM todo_lists WHERE user_id = ?", [id])
+        conn.commit()
+        conn.close()
+
+    except sqlite3.Error as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@app.get("/todo-lists", status_code=status.HTTP_200_OK)
+def get_all_todo_lists():
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM todo_lists")
+        users = cursor.fetchall()
+        conn.close()
+
+        return JSONResponse(content={"todo_lists": users}, status_code=status.HTTP_200_OK)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+>>>>>>> main
 
 @app.get("/todo/{id}")
 def read_user_tasks(user_id: int):
