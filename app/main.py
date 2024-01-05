@@ -1,10 +1,9 @@
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
-from app.db_operations import User, BaseModel, ToDo
+from app.db_operations import User, BaseModel, ToDo, ToDoTask
 import sqlite3
 from sqlite_utils import Database
 import hashlib
-
 
 
 db = Database("my_todo.db")
@@ -16,6 +15,7 @@ def get_db():
         cursor = connection.cursor()
         yield cursor
         connection.commit()
+
 
 def hash_password(password: str) -> str:
 
@@ -51,7 +51,6 @@ def create_user(user: User):
 
         hashed_password = hash_password(user.password)
 
-
         cursor.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [user.username, user.email, hashed_password])
         conn.commit()
         conn.close()
@@ -69,7 +68,6 @@ def delete_user(id: int):
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        # Assuming 'id' is the primary key for the 'users' table
         cursor.execute("DELETE FROM users WHERE id = ?", [id])
         conn.commit()
         conn.close()
@@ -96,7 +94,7 @@ def create_todo_list(id: int, user: ToDo):
 
 
 @app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(id: int):
+def delete_list_user(id: int):
     try:
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
@@ -130,17 +128,38 @@ def get_all_todo_lists():
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@app.get("/todo/{id}")
-def read_user_tasks(user_id: int):
-    result = read_todo(id)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
-    return result
-    pass
+@app.post("/todo-items/{list_id}/{id}", status_code=status.HTTP_201_CREATED)
+def create_todo_task(list_id: int, user: ToDoTask):
+    try:
+        with sqlite3.connect('my_todo.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)", [list_id, user.context, user.completed])
+            conn.commit()
+
+        return JSONResponse(content={"message": "Task inserted successfully"}, status_code=status.HTTP_201_CREATED)
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@app.put("/todo/{id}")
-def update_todo(user_id: int, todo: BaseModel):
+@app.get("/todo-items")
+def get_todo_tasks():
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM todo_items")
+        users = cursor.fetchall()
+        conn.close()
+
+        return JSONResponse(content={"users": users}, status_code=status.HTTP_200_OK)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+    return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@app.put("/todo-items/{id}")
+def update_todo_task(user_id: int, todo: BaseModel):
     result = update_todo(id, todo)
     if "error" in result:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
@@ -158,8 +177,8 @@ def update_user(user_id: int, user: User):
 
 
 @app.delete("/todo/{id}")
-def delete_todo(user_id: int):
-    result = delete_todo(id)
+def delete_todo_item(user_id: int):
+    result = delete_todo_item(id)
     if "error" in result:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
     return {"message": f"Todo with id {id} deleted successfully"}

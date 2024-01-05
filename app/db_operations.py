@@ -17,6 +17,12 @@ class ToDo(BaseModel):
     title: str
 
 
+class ToDoTask(BaseModel):
+    listid: int
+    context: str
+    completed: int
+
+
 
 
 
