@@ -124,7 +124,7 @@ def delete_list_user(id: int):
         cursor = conn.cursor()
 
         # Assuming 'id' is the primary key for the 'users' table
-        cursor.execute("DELETE FROM todo_lists WHERE user_id = ?", [id])
+        cursor.execute("DELETE FROM todo_lists WHERE id = ?", [id])
         conn.commit()
         conn.close()
 
@@ -141,7 +141,7 @@ def get_all_todo_lists():
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM todo_lists")
+        cursor.execute("SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username FROM todo_lists JOIN users ON todo_lists.user_id = users.id;")
         users = cursor.fetchall()
         conn.close()
 
