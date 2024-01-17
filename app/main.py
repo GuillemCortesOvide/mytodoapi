@@ -5,7 +5,6 @@ import sqlite3
 from sqlite_utils import Database
 import hashlib
 
-
 db = Database("my_todo.db")
 app = FastAPI()
 
@@ -32,7 +31,7 @@ def get_users():
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM users")
+        cursor.execute("SELECT id, username, email FROM users")
         users = cursor.fetchall()
         conn.close()
 
@@ -77,6 +76,31 @@ def delete_user(id: int):
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@app.put("/users/{id}")
+def update_user(id: int, user: User):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM USERS WHERE id=?", (id,))
+        existing_user = cursor.fetchone()
+        if existing_user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+        hashed_password = hash_password(user.password) if user.password else existing_user[3]
+
+        cursor.execute("UPDATE users SET username=?, email=?, password=? WHERE id=?",
+                       (user.username, user.email, hashed_password, id))
+        conn.commit()
+        conn.close()
+
+        return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @app.post("/todo-lists/{id}", status_code=status.HTTP_201_CREATED)
@@ -127,6 +151,14 @@ def get_all_todo_lists():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@app.put("/todo-lists/{id}")
+def update_user(user_id: int, user: User):
+    result = update_user(id, user)
+    if "error" in result:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    return {"message": f"User with id {id} updated successfully"}
+    pass
+
 
 @app.post("/todo-items/{list_id}/{id}", status_code=status.HTTP_201_CREATED)
 def create_todo_task(list_id: int, user: ToDoTask):
@@ -148,7 +180,7 @@ def get_todo_tasks():
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM todo_items")
+        cursor.execute("SELECT * FROM todo_items;")
         users = cursor.fetchall()
         conn.close()
 
@@ -157,23 +189,6 @@ def get_todo_tasks():
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
     return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-@app.put("/todo-items/{id}")
-def update_todo_task(user_id: int, todo: BaseModel):
-    result = update_todo(id, todo)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
-    return {"message": f"Todo with id {id} updated successfully"}
-    pass
-
-
-@app.put("/users/{id}")
-def update_user(user_id: int, user: User):
-    result = update_user(id, user)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    return {"message": f"User with id {id} updated successfully"}
-    pass
 
 
 @app.delete("/todo/{id}")
@@ -191,4 +206,13 @@ def read_todo_list():
     if not result:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No todos found")
     return result
+    pass
+
+
+@app.put("/todo-items/{id}")
+def update_todo_task(user_id: int, todo: BaseModel):
+    result = update_todo(id, todo)
+    if "error" in result:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
+    return {"message": f"Todo with id {id} updated successfully"}
     pass
