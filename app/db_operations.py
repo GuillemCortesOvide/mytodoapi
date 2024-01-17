@@ -13,7 +13,7 @@ class User(BaseModel):
     password: str
 
 
-class ToDo(BaseModel):
+class ToDoList(BaseModel):
     title: str
 
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
-from app.db_operations import User, BaseModel, ToDo, ToDoTask
+from app.db_operations import User, BaseModel, ToDoList, ToDoTask
 import sqlite3
 from sqlite_utils import Database
 import hashlib
@@ -103,12 +103,12 @@ def update_user(id: int, user: User):
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@app.post("/todo-lists/{id}", status_code=status.HTTP_201_CREATED)
-def create_todo_list(id: int, user: ToDo):
+@app.post("/todo-lists/{user_id}", status_code=status.HTTP_201_CREATED)
+def create_todo_list(user_id: int, todo_list: ToDoList):
     try:
         with sqlite3.connect('my_todo.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO todo_lists (user_id, title) VALUES (?, ?)", [id, user.title])
+            cursor.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [user_id, todo_list.title])
             conn.commit()
 
         return JSONResponse(content={"message": "List inserted successfully"}, status_code=status.HTTP_201_CREATED)
@@ -152,13 +152,28 @@ def get_all_todo_lists():
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @app.put("/todo-lists/{id}")
-def update_user(user_id: int, user: User):
-    result = update_user(id, user)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    return {"message": f"User with id {id} updated successfully"}
-    pass
+def update_list(id: int, user: ToDoList):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
 
+        cursor.execute("SELECT * FROM todo_lists WHERE id=?", (id,))
+        existing_user = cursor.fetchone()
+        if existing_user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+        hashed_password = hash_password(user.password) if user.password else existing_user[3]
+
+        cursor.execute("UPDATE users SET username=?, email=?, password=? WHERE id=?",
+                       (user.username, user.email, hashed_password, id))
+        conn.commit()
+        conn.close()
+
+        return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @app.post("/todo-items/{list_id}/{id}", status_code=status.HTTP_201_CREATED)
 def create_todo_task(list_id: int, user: ToDoTask):
