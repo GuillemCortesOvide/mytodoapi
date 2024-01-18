@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
-from app.db_operations import User, BaseModel, ToDoList, ToDoTask
+from app.db_operations import User, ToDoList, ToDoTask
 import sqlite3
 from sqlite_utils import Database
 import hashlib
