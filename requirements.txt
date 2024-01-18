@@ -1,4 +1,7 @@
-fastapi
+fastapi~=0.108.0
 uvicorn
 sqlite-utils
 
+
+pydantic~=2.5.3
+pytest~=7.4.4
