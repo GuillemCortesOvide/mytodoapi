@@ -151,6 +151,7 @@ def get_all_todo_lists():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 @app.put("/todo-lists/{id}")
 def update_list(id: int, user: ToDoList):
     try:
@@ -175,6 +176,7 @@ def update_list(id: int, user: ToDoList):
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 @app.post("/todo-items/{list_id}/{id}", status_code=status.HTTP_201_CREATED)
 def create_todo_task(list_id: int, user: ToDoTask):
     try:
@@ -195,7 +197,7 @@ def get_todo_tasks():
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM todo_items;")
+        cursor.execute("SELECT todo_items.id AS todo_task_id, todo_items.list_id AS user_list, todo_items.context AS task, todo_items.completed AS status, users.id AS user_id, users.username FROM todo_items JOIN users ON todo_items.id = users.id;")
         users = cursor.fetchall()
         conn.close()
 
@@ -205,23 +207,27 @@ def get_todo_tasks():
         error_detail = {"error": "Internal Server Error", "details": str(e)}
     return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@app.delete("/todo-items/{id}")
+def delete_todo_item(id: int):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+        # Assuming 'id' is the primary key for the 'todo_items' table
+        cursor.execute("DELETE FROM todo_items WHERE id = ?", [id])
+        conn.commit()
+        conn.close()
 
-@app.delete("/todo/{id}")
-def delete_todo_item(user_id: int):
-    result = delete_todo_item(id)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
-    return {"message": f"Todo with id {id} deleted successfully"}
-    pass
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
 
+        return {"message": f"Todo with id {id} deleted successfully"}
 
-@app.get("/todo-tasks")
-def read_todo_list():
-    result = read_todo_list()
-    if not result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No todos found")
-    return result
-    pass
+    except sqlite3.Error as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
 
 
 @app.put("/todo-items/{id}")
