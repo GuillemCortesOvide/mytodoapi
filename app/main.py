@@ -163,14 +163,12 @@ def update_list(id: int, user: ToDoList):
         if existing_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
-        hashed_password = hash_password(user.password) if user.password else existing_user[3]
-
-        cursor.execute("UPDATE users SET username=?, email=?, password=? WHERE id=?",
-                       (user.username, user.email, hashed_password, id))
+        cursor.execute("UPDATE todo_lists SET title=? WHERE id=?",
+                       (user.title, id))
         conn.commit()
         conn.close()
 
-        return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
+        return JSONResponse(content={"message": "List updated successfully"}, status_code=status.HTTP_201_CREATED)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -230,10 +228,24 @@ def delete_todo_item(id: int):
 
 
 
-@app.put("/todo-items/{id}")
-def update_todo_task(user_id: int, todo: BaseModel):
-    result = update_todo(id, todo)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
-    return {"message": f"Todo with id {id} updated successfully"}
-    pass
+@app.put("/todo-items/{list_id}")
+def update_user(list_id: int, user: ToDoTask):
+    try:
+        conn = sqlite3.connect('my_todo.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,))
+        existing_user = cursor.fetchone()
+        if existing_user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
+
+        cursor.execute("UPDATE todo_items SET context=?, completed=? WHERE list_id=?",
+                       (user.context, user.completed, list_id))
+        conn.commit()
+        conn.close()
+
+        return JSONResponse(content={"message": "Task updated successfully"}, status_code=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        error_detail = {"error": "Internal Server Error", "details": str(e)}
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
