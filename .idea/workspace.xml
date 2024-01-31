@@ -5,10 +5,67 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix UPDATE endpoints todo-tasks and todo-lists">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Tests Folder/test_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_todo.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_test_todo.db-journal" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_todo.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/REQUESTED" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/fastapi-0.108.0.dist-info/licenses/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette-0.32.0.post1.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette-0.32.0.post1.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette-0.32.0.post1.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette-0.32.0.post1.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette-0.32.0.post1.dist-info/licenses/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_compat.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_compat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_exception_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_exception_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/applications.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/applications.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/background.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/background.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/concurrency.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/concurrency.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/convertors.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/convertors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/datastructures.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/datastructures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/formparsers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/formparsers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/cors.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/cors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/gzip.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/gzip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/httpsredirect.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/httpsredirect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/sessions.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/sessions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/trustedhost.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/trustedhost.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/middleware/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/responses.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/responses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/routing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/staticfiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/staticfiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/status.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/status.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/templating.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/templating.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/testclient.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/testclient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/types.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/websockets.py" beforeDir="false" afterPath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/starlette/websockets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/REQUESTED" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/entry_points.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mytodoapi/Lib/site-packages/uvicorn-0.25.0.dist-info/licenses/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +113,9 @@
     "Python tests.Python tests for test_main.test_delete_user.executor": "Run",
     "Python tests.Python tests for test_main.test_get_users.executor": "Run",
     "Python tests.pytest for test_main.test_db_session.executor": "Run",
+    "Python tests.pytest for test_main.test_get_users.executor": "Run",
     "Python tests.pytest for test_main.test_update_user.executor": "Run",
+    "Python.main.executor": "Run",
     "Python.uvicorn.exe.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -70,15 +129,38 @@
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_main.test_create_user">
+  <component name="RunManager" selected="Python tests.pytest for test_main.test_get_users">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="mytodoapi" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_main.test_create_user" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\mytodoapi\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (mytodoapi)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -101,21 +183,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_main.test_get_users" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="mytodoapi" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/Tests Folder" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_get_users&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="pytest for test_main.test_db_session" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -133,7 +200,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_main.test_update_user" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_main.test_get_users" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,17 +213,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_update_user&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_get_users&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_main.test_create_user" />
-        <item itemvalue="Python tests.pytest for test_main.test_db_session" />
-        <item itemvalue="Python tests.pytest for test_main.test_update_user" />
-        <item itemvalue="Python tests.Python tests for test_main.test_get_users" />
+        <item itemvalue="Python tests.pytest for test_main.test_get_users" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python tests.Python tests for test_main.test_delete_user" />
+        <item itemvalue="Python tests.pytest for test_main.test_db_session" />
+        <item itemvalue="Python tests.Python tests for test_main.test_create_user" />
       </list>
     </recent_temporary>
   </component>

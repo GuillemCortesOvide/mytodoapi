@@ -32,12 +32,14 @@ def test_db_session():
 
 def test_create_user(sample_user):
     response = client.post("/users", json=sample_user)
-    assert response.status_code == 201
 
-except Exception as e:
-        # Print additional information or raise a custom assertion error
-        print(f"Test failed: {e}")
-        raise
+    try:
+        assert response.status_code == 201
+
+    except Exception as e:
+            # Print additional information or raise a custom assertion error
+            print(f"Test failed: {e}")
+            raise
 
 
 

@@ -1,23 +1,25 @@
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.responses import JSONResponse
 from app.db_operations import User, ToDoList, ToDoTask
 import sqlite3
 from sqlite_utils import Database
 import hashlib
 
-db = Database("my_todo.db")
+DATABASE_URL = "my_test_todo.db"
+my_db = Database(DATABASE_URL)
 app = FastAPI()
 
 
 def get_db():
-    with sqlite3.connect("my_todo.db") as connection:
+    with sqlite3.connect(DATABASE_URL) as connection:
         cursor = connection.cursor()
-        yield cursor
-        connection.commit()
+        try:
+            yield cursor
+        finally:
+            connection.commit()
 
 
 def hash_password(password: str) -> str:
-
     hash_algorithm = hashlib.sha256()
     hash_algorithm.update(password.encode('utf-8'))
     hashed_password = hash_algorithm.hexdigest()
@@ -26,15 +28,11 @@ def hash_password(password: str) -> str:
 
 
 @app.get("/users", status_code=status.HTTP_200_OK)
-def get_users():
+def get_users(db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
+        cursor = db
         cursor.execute("SELECT id, username, email FROM users")
         users = cursor.fetchall()
-        conn.close()
-
         return JSONResponse(content={"users": users}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
@@ -43,16 +41,13 @@ def get_users():
 
 
 @app.post("/users", status_code=status.HTTP_201_CREATED)
-def create_user(user: User):
+def create_user(user: User, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
 
         hashed_password = hash_password(user.password)
 
-        cursor.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [user.username, user.email, hashed_password])
-        conn.commit()
-        conn.close()
+        db.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+                   [user.username, user.email, hashed_password])
 
         return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
 
@@ -62,14 +57,10 @@ def create_user(user: User):
 
 
 @app.delete("/users/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(id: int):
+def delete_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
-        cursor.execute("DELETE FROM users WHERE id = ?", [id])
-        conn.commit()
-        conn.close()
+        db.execute("DELETE FROM users WHERE id = ?", [id])
+        return None
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -79,23 +70,16 @@ def delete_user(id: int):
 
 
 @app.put("/users/{id}")
-def update_user(id: int, user: User):
+def update_user(id: int, user: User, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT * FROM USERS WHERE id=?", (id,))
-        existing_user = cursor.fetchone()
+        existing_user = db.execute("SELECT * FROM USERS WHERE id=?", (id,)).fetchone()
         if existing_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         hashed_password = hash_password(user.password) if user.password else existing_user[3]
 
-        cursor.execute("UPDATE users SET username=?, email=?, password=? WHERE id=?",
-                       (user.username, user.email, hashed_password, id))
-        conn.commit()
-        conn.close()
-
+        db.execute("UPDATE users SET username=?, email=?, password=? WHERE id=?",
+                   (user.username, user.email, hashed_password, id))
         return JSONResponse(content={"message": "User inserted successfully"}, status_code=status.HTTP_201_CREATED)
 
     except Exception as e:
@@ -104,12 +88,10 @@ def update_user(id: int, user: User):
 
 
 @app.post("/todo-lists/{user_id}", status_code=status.HTTP_201_CREATED)
-def create_todo_list(user_id: int, todo_list: ToDoList):
+def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection = Depends(get_db)):
     try:
-        with sqlite3.connect('my_todo.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [user_id, todo_list.title])
-            conn.commit()
+
+        db.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [user_id, todo_list.title])
 
         return JSONResponse(content={"message": "List inserted successfully"}, status_code=status.HTTP_201_CREATED)
     except Exception as e:
@@ -118,15 +100,10 @@ def create_todo_list(user_id: int, todo_list: ToDoList):
 
 
 @app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_list_user(id: int):
+def delete_list_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
         # Assuming 'id' is the primary key for the 'users' table
-        cursor.execute("DELETE FROM todo_lists WHERE id = ?", [id])
-        conn.commit()
-        conn.close()
+        db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -136,15 +113,12 @@ def delete_list_user(id: int):
 
 
 @app.get("/todo-lists", status_code=status.HTTP_200_OK)
-def get_all_todo_lists():
+def get_all_todo_lists(db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username FROM todo_lists JOIN users ON todo_lists.user_id = users.id;")
+        cursor = db
+        db.execute(
+            "SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username FROM todo_lists JOIN users ON todo_lists.user_id = users.id;")
         users = cursor.fetchall()
-        conn.close()
-
         return JSONResponse(content={"todo_lists": users}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
@@ -153,20 +127,15 @@ def get_all_todo_lists():
 
 
 @app.put("/todo-lists/{id}")
-def update_list(id: int, user: ToDoList):
+def update_list(id: int, user: ToDoList, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
+        existing_list = db.execute("SELECT * FROM todo_lists WHERE id=?", (id,)).fetchone()
 
-        cursor.execute("SELECT * FROM todo_lists WHERE id=?", (id,))
-        existing_user = cursor.fetchone()
-        if existing_user is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        if existing_list is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="List not found")
 
-        cursor.execute("UPDATE todo_lists SET title=? WHERE id=?",
-                       (user.title, id))
-        conn.commit()
-        conn.close()
+        db.execute("UPDATE todo_lists SET title=? WHERE id=?",
+                   (user.title, id))
 
         return JSONResponse(content={"message": "List updated successfully"}, status_code=status.HTTP_201_CREATED)
 
@@ -180,7 +149,8 @@ def create_todo_task(list_id: int, user: ToDoTask):
     try:
         with sqlite3.connect('my_todo.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)", [list_id, user.context, user.completed])
+            cursor.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)",
+                           [list_id, user.context, user.completed])
             conn.commit()
 
         return JSONResponse(content={"message": "Task inserted successfully"}, status_code=status.HTTP_201_CREATED)
@@ -195,7 +165,8 @@ def get_todo_tasks():
         conn = sqlite3.connect('my_todo.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT todo_items.id AS todo_task_id, todo_items.list_id AS user_list, todo_items.context AS task, todo_items.completed AS status, users.id AS user_id, users.username FROM todo_items JOIN users ON todo_items.id = users.id;")
+        cursor.execute(
+            "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS user_list, todo_items.context AS task, todo_items.completed AS status, users.id AS user_id, users.username FROM todo_items JOIN users ON todo_items.id = users.id;")
         users = cursor.fetchall()
         conn.close()
 
@@ -204,6 +175,7 @@ def get_todo_tasks():
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
     return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @app.delete("/todo-items/{id}")
 def delete_todo_item(id: int):
@@ -225,7 +197,6 @@ def delete_todo_item(id: int):
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
-
 
 
 @app.put("/todo-items/{list_id}")
