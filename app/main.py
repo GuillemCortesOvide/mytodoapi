@@ -59,8 +59,18 @@ def create_user(user: User, db: sqlite3.Connection = Depends(get_db)):
 @app.delete("/users/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        db.execute("DELETE FROM users WHERE id = ?", [id])
-        return None
+        # Delete tasks associated with the user
+        db.execute("DELETE FROM todo_items WHERE list_id IN (SELECT id FROM todo_lists WHERE user_id = ?)", [id])
+
+        # Delete lists associated with the user
+        db.execute("DELETE FROM todo_lists WHERE user_id = ?", [id])
+
+        # Delete the user
+        result = db.execute("DELETE FROM users WHERE id = ?", [id])
+
+        if result.rowcount == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        return JSONResponse(content={"message": "User and all related data deleted"}, status_code=status.HTTP_200_OK)
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -102,8 +112,13 @@ def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection =
 @app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_list_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        # Assuming 'id' is the primary key for the 'users' table
-        db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
+
+        result = db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
+
+        if result.rowcount == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
+
+        return None
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -145,13 +160,14 @@ def update_list(id: int, user: ToDoList, db: sqlite3.Connection = Depends(get_db
 
 
 @app.post("/todo-items/{list_id}/{id}", status_code=status.HTTP_201_CREATED)
-def create_todo_task(list_id: int, user: ToDoTask):
+def create_todo_task(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(get_db)):
     try:
-        with sqlite3.connect('my_todo.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)",
-                           [list_id, user.context, user.completed])
-            conn.commit()
+        existing_list = db.execute("SELECT id FROM todo_lists WHERE id=?", (list_id,)).fetchone()
+        if not existing_list:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="List not found")
+
+        db.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)",
+                       [list_id, user.context, user.completed])
 
         return JSONResponse(content={"message": "Task inserted successfully"}, status_code=status.HTTP_201_CREATED)
     except Exception as e:
@@ -160,15 +176,12 @@ def create_todo_task(list_id: int, user: ToDoTask):
 
 
 @app.get("/todo-items")
-def get_todo_tasks():
+def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
-
-        cursor.execute(
+        db.execute(
             "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS user_list, todo_items.context AS task, todo_items.completed AS status, users.id AS user_id, users.username FROM todo_items JOIN users ON todo_items.id = users.id;")
-        users = cursor.fetchall()
-        conn.close()
+        users = db.fetchall()
+        db.close()
 
         return JSONResponse(content={"users": users}, status_code=status.HTTP_200_OK)
 
@@ -177,20 +190,17 @@ def get_todo_tasks():
     return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@app.delete("/todo-items/{id}")
-def delete_todo_item(id: int):
+@app.delete("/todo-items/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_todo_item(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
         # Assuming 'id' is the primary key for the 'todo_items' table
-        cursor.execute("DELETE FROM todo_items WHERE id = ?", [id])
-        conn.commit()
-        conn.close()
 
-        if cursor.rowcount == 0:
+        result = db.execute("DELETE FROM todo_items WHERE id = ?", [id])
+
+        if result.rowcount == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
 
-        return {"message": f"Todo with id {id} deleted successfully"}
+        return None
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -200,20 +210,16 @@ def delete_todo_item(id: int):
 
 
 @app.put("/todo-items/{list_id}")
-def update_user(list_id: int, user: ToDoTask):
+def update_user(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(get_db)):
     try:
-        conn = sqlite3.connect('my_todo.db')
-        cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,))
-        existing_user = cursor.fetchone()
+        existing_user = db.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,)).fetchone()
+
         if existing_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
 
-        cursor.execute("UPDATE todo_items SET context=?, completed=? WHERE list_id=?",
+        db.execute("UPDATE todo_items SET context=?, completed=? WHERE list_id=?",
                        (user.context, user.completed, list_id))
-        conn.commit()
-        conn.close()
 
         return JSONResponse(content={"message": "Task updated successfully"}, status_code=status.HTTP_201_CREATED)
 

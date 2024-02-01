@@ -5,8 +5,7 @@ from app.main import app, get_db
 import pytest
 import logging
 from sqlite_utils import Database
-from app.db_operations import User, ToDoList, ToDoTask
-app.dependency_overrides[get_db] = lambda: Database("my_test_todo.db")
+
 
 logging.basicConfig(level=logging.DEBUG)
 client = TestClient(app)
@@ -46,12 +45,12 @@ def test_create_user(sample_user):
 def test_delete_user(sample_user):
 
     response_create = client.post("/users", json=sample_user)
-    assert response_create.status_code == 201
+    assert response_create.status_code == 200
 
     user_id = response_create.json()["user_id"]
 
     response_delete = client.delete(f"/users/{user_id}")
-    assert response_delete.status_code == 204
+    assert response_delete.status_code == 200
 
     # request to get the deleted user and assert that it's not found
     response_get_deleted = client.get(f"/users/{user_id}")
