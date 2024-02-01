@@ -114,13 +114,12 @@ def delete_list_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
         db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
 
-        result = db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
+        result = db.execute("DELETE FROM todo_items WHERE list_id = ?", [id])
 
         if result.rowcount == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="To Do List not found")
 
         return JSONResponse(content={"message": "List and all related tasks deleted"}, status_code=status.HTTP_200_OK)
-
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
