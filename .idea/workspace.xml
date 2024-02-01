@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix UPDATE endpoints todo-tasks and todo-lists">
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix endpoints, error handling, erase all user data and fix database inconsistency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Tests Folder/test_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_todo.db" afterDir="false" />
     </list>
@@ -226,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705587037514</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix endpoints, error handling, erase all user data and fix database inconsistency">
+      <option name="closed" value="true" />
+      <created>1706796173209</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706796173209</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,7 +253,8 @@
     <MESSAGE value="Fix get todo lists endpoint SQL query" />
     <MESSAGE value="Fix get todo items endpoint" />
     <MESSAGE value="Fix UPDATE endpoints todo-tasks and todo-lists" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix UPDATE endpoints todo-tasks and todo-lists" />
+    <MESSAGE value="Fix endpoints, error handling, erase all user data and fix database inconsistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix endpoints, error handling, erase all user data and fix database inconsistency" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

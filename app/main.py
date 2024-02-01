@@ -112,13 +112,15 @@ def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection =
 @app.delete("/todo-lists/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_list_user(id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
+        db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
 
         result = db.execute("DELETE FROM todo_lists WHERE id = ?", [id])
 
         if result.rowcount == 0:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="To Do List not found")
 
-        return None
+        return JSONResponse(content={"message": "List and all related tasks deleted"}, status_code=status.HTTP_200_OK)
+
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -130,11 +132,12 @@ def delete_list_user(id: int, db: sqlite3.Connection = Depends(get_db)):
 @app.get("/todo-lists", status_code=status.HTTP_200_OK)
 def get_all_todo_lists(db: sqlite3.Connection = Depends(get_db)):
     try:
-        cursor = db
-        db.execute(
-            "SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username FROM todo_lists JOIN users ON todo_lists.user_id = users.id;")
-        users = cursor.fetchall()
-        return JSONResponse(content={"todo_lists": users}, status_code=status.HTTP_200_OK)
+        cursor = db.execute(
+            "SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username "
+            "FROM todo_lists JOIN users ON todo_lists.user_id = users.id;")
+        todo_lists = cursor.fetchall()
+
+        return JSONResponse(content={"todo_lists": todo_lists}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -175,15 +178,17 @@ def create_todo_task(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depe
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@app.get("/todo-items")
+@app.get("/todo-items", status_code=status.HTTP_200_OK)
 def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
     try:
-        db.execute(
-            "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS user_list, todo_items.context AS task, todo_items.completed AS status, users.id AS user_id, users.username FROM todo_items JOIN users ON todo_items.id = users.id;")
-        users = db.fetchall()
-        db.close()
+        cursor = db.execute(
+            "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS list_id, "
+            "todo_items.context AS task, todo_items.completed AS status "
+            "FROM todo_items;")
 
-        return JSONResponse(content={"users": users}, status_code=status.HTTP_200_OK)
+        tasks = cursor.fetchall()
+
+        return JSONResponse(content={"todo_tasks": tasks}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -200,7 +205,7 @@ def delete_todo_item(id: int, db: sqlite3.Connection = Depends(get_db)):
         if result.rowcount == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
 
-        return None
+        return JSONResponse(content={"message": "Task deleted succesfully"}, status_code=status.HTTP_200_OK)
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
