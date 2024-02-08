@@ -197,7 +197,7 @@ def update_list(list_id: int, user: ToDoList, db: sqlite3.Connection = Depends(g
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# Delete Specific Lists
+# Delete Specific List
 @app.delete("/todo-lists/{list_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_list_user(list_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:

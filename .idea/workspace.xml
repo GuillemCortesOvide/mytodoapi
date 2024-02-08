@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix delete endpoints and SQL queries">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Tests Folder/test_main.py" afterDir="false" />
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Refactor endpoints, comment endpoints and JSON structures">
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_todo.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +31,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="d1992642-dab8-4968-810b-efc2f3473862" />
+        <option name="accountId" value="03ce5b89-ef89-4af0-80ad-5c643ff15560" />
         <option name="url" value="https://github.com/GuillemCortesOvide/mytodoapi.git" />
       </UrlAndAccount>
     </option>
@@ -250,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706800003705</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Refactor endpoints, comment endpoints and JSON structures">
+      <option name="closed" value="true" />
+      <created>1707407044191</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1707407044191</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,7 +278,8 @@
     <MESSAGE value="Fix endpoints, error handling, erase all user data and fix database inconsistency" />
     <MESSAGE value="Fix get endpoints and SQL queries" />
     <MESSAGE value="Fix delete endpoints and SQL queries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix delete endpoints and SQL queries" />
+    <MESSAGE value="Refactor endpoints, comment endpoints and JSON structures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor endpoints, comment endpoints and JSON structures" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
