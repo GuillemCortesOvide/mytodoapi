@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix get endpoints and SQL queries">
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Fix delete endpoints and SQL queries">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Tests Folder/test_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_todo.db" afterDir="false" />
     </list>
@@ -241,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706798666700</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix delete endpoints and SQL queries">
+      <option name="closed" value="true" />
+      <created>1706800003705</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706800003705</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,18 +272,10 @@
     <MESSAGE value="Fix UPDATE endpoints todo-tasks and todo-lists" />
     <MESSAGE value="Fix endpoints, error handling, erase all user data and fix database inconsistency" />
     <MESSAGE value="Fix get endpoints and SQL queries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix get endpoints and SQL queries" />
+    <MESSAGE value="Fix delete endpoints and SQL queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix delete endpoints and SQL queries" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/Tests Folder/test_main.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="args" />
