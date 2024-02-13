@@ -326,7 +326,6 @@ def update_user(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(g
 @app.delete("/todo-items/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_todo_item(task_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        # Assuming 'id' is the primary key for the 'todo_items' table
 
         result = db.execute("DELETE FROM todo_items WHERE id = ?", [task_id])
 
