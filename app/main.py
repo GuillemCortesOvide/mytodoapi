@@ -5,7 +5,7 @@ import sqlite3
 from sqlite_utils import Database
 import hashlib, logging
 
-DATABASE_URL = "my_test_todo.db"
+DATABASE_URL = "my_todo.db"
 my_db = Database(DATABASE_URL)
 app = FastAPI()
 
@@ -228,34 +228,61 @@ def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
     try:
         cursor = db.execute(
             "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS list_id, "
-            "todo_items.context AS task, todo_items.completed AS status "
-            "FROM todo_items;")
+            "todo_items.context AS task, todo_items.completed AS status, "
+            "todo_lists.title AS title "
+            "FROM todo_items "
+            "LEFT JOIN todo_lists ON todo_items.list_id = todo_lists.id;")
 
-        tasks = cursor.fetchall()
+        todo_items = cursor.fetchall()
 
-        return JSONResponse(content={"todo_tasks": tasks}, status_code=status.HTTP_200_OK)
+        structured_tasks = [
+            {
+                "task_id": task[0],
+                "list_id": task[1],
+                "list_title": task[4],
+                "context": task[2],
+                "completed": task[3],
+            }
+            for task in todo_items
+        ]
+
+        return JSONResponse(content={"todo_tasks": structured_tasks}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
-    return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # Get Tasks from a specific list
 @app.get("/todo-items/{list_id}", status_code=status.HTTP_200_OK)
-def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
+def get_todo_tasks(list_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
         cursor = db.execute(
             "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS list_id, "
+            "todo_lists.title AS title, "
             "todo_items.context AS task, todo_items.completed AS status "
-            "FROM todo_items;")
+            "FROM todo_items "
+            "JOIN todo_lists ON todo_items.list_id = todo_lists.id "
+            "WHERE todo_items.list_id = ?;", [list_id])
 
         tasks = cursor.fetchall()
 
-        return JSONResponse(content={"todo_tasks": tasks}, status_code=status.HTTP_200_OK)
+        structured_tasks = [
+            {
+                "task_id": task[0],
+                "list_id": task[1],
+                "title": task[2],
+                "context": task[3],
+                "completed": task[4],
+            }
+            for task in tasks
+        ]
+
+        return JSONResponse(content={"specific_task": structured_tasks}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
-    return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # Create a new task for specific list and user
@@ -296,17 +323,17 @@ def update_user(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(g
 
 
 # Delete task from a specific list
-@app.delete("/todo-items/{list_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_todo_item(id: int, db: sqlite3.Connection = Depends(get_db)):
+@app.delete("/todo-items/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_todo_item(task_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
         # Assuming 'id' is the primary key for the 'todo_items' table
 
-        result = db.execute("DELETE FROM todo_items WHERE id = ?", [id])
+        result = db.execute("DELETE FROM todo_items WHERE id = ?", [task_id])
 
         if result.rowcount == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Todo not found")
 
-        return JSONResponse(content={"message": "Task deleted succesfully"}, status_code=status.HTTP_200_OK)
+        return JSONResponse(content={"message": "Task deleted successfully"}, status_code=status.HTTP_200_OK)
 
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
