@@ -1,20 +1,23 @@
 import sqlite3
 from urllib import response
 from fastapi.testclient import TestClient
+from fastapi import HTTPException
 from app.main import app
 import pytest
 import logging
+import uuid
 
 logging.basicConfig(level=logging.DEBUG)
 client = TestClient(app)
 
 
 @pytest.fixture
-def sample_user():
+def get_sample_user():
+    unique_id = str(uuid.uuid4())[:8]
     return {
-        "username": "test_user",
-        "email": "test@myexample.com",
-        "password": "test-password"
+        "username": f"test_user{unique_id}",
+        "email": f"test@myexample.com{unique_id}",
+        "password": f"test-password{unique_id}"
     }
 
 
@@ -28,37 +31,46 @@ def test_db_session():
         connection.close()
 
 
-def test_create_user(sample_user):
-    response = client.post("/users", json=sample_user)
+def test_create_user(get_sample_user):
+    user_response = client.post("/users", json=get_sample_user)
 
     try:
-        assert response.status_code == 201
+        assert user_response.status_code == 201
 
     except Exception as e:
-        # Print additional information or raise a custom assertion error
         print(f"Test failed: {e}")
         raise
 
 
-def test_delete_user(sample_user):
-    response_create = client.post("/users", json=sample_user)
-    assert response_create.status_code == 201
+def test_delete_user(get_sample_user):
+    user_data = get_sample_user
+    user_response = client.post("/users", json=user_data)
+    try:
+        assert user_response.status_code == 201
+    except HTTPException as e:
+        print(f"HTTPException: {e}")
+        print(f"Response content: {user_response.content}")
+        raise
 
-    user_id = response_create.json()["user_id"]
+    # Get the user_id from the created user
+    user_id = user_response.json().get("user_id")
 
+    # Delete the user
     response_delete = client.delete(f"/users/{user_id}")
 
     try:
         assert response_delete.status_code == 200
-    except Exception as e:
+    except AssertionError as e:
         # Print additional information or raise a custom assertion error
-        print(f"Test failed: {e}")
+        print(f"Assertion error: {e}")
+        print(f"Response status code: {response_delete.status_code}")
         print(f"Response content: {response_delete.content}")
         raise
 
-    # request to get the deleted user and assert that it's not found
+    # Request to get the deleted user and assert that it's not found
     response_get_deleted = client.get(f"/users/{user_id}")
     assert response_get_deleted.status_code == 404
+
 
 
 def test_get_users():

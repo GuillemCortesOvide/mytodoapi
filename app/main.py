@@ -5,7 +5,7 @@ import sqlite3
 from sqlite_utils import Database
 import hashlib, logging
 
-DATABASE_URL = "my_todo.db"
+DATABASE_URL = "my_test_todo.db"
 my_db = Database(DATABASE_URL)
 app = FastAPI()
 
