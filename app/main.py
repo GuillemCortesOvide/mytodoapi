@@ -75,7 +75,9 @@ def create_user(user: User, db: sqlite3.Connection = Depends(get_db)):
         db.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
                    [user.username, user.email, hashed_password])
 
-        return JSONResponse(content={"message": "User created successfully"}, status_code=status.HTTP_201_CREATED)
+        user_id = db.lastrowid
+
+        return JSONResponse(content={"user_id": user_id, "message": "User created successfully"}, status_code=status.HTTP_201_CREATED)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
