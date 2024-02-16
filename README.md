@@ -1,8 +1,9 @@
 Hello World!
 
-This repository it's about a CRUD API that creates, reads, updates and deletes users, lists and tasks asociated. Is a very basic project I developed in order to learn more about backend developement.
-If any of you is way more advanced on backend development and have any suggestion is welcome. 
+Welcome to this repository dedicated to a CRUD API designed for creating, reading, updating, and deleting users, lists, and tasks. This project serves as a fundamental exploration into backend development, offering a straightforward implementation.
 
-I used uvicorn to run this API on my machine, and now I can see it runs smooth like butter and so your machine.
+To run this API on your machine, I employed uvicorn, ensuring smooth functionality both on my system and, hopefully, on yours too.
 
-I hope this project is helpful to anyone.
+If you are more advanced in backend development and have any suggestions or improvements, your input is highly valued.
+
+I trust that this project proves helpful to anyone exploring similar domains.
