@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from app.db_operations import User, ToDoList, ToDoTask
 import sqlite3
 from sqlite_utils import Database
-import hashlib, logging
+import hashlib
 
 DATABASE_URL = "my_test_todo.db"
 my_db = Database(DATABASE_URL)
@@ -174,7 +174,9 @@ def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection =
 
         db.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [user_id, todo_list.title])
 
-        return JSONResponse(content={"message": "List created successfully"}, status_code=status.HTTP_201_CREATED)
+        list_id = db.lastrowid
+
+        return JSONResponse(content={"list_id":f"{list_id}", "message": "List created successfully"}, status_code=status.HTTP_201_CREATED)
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -298,7 +300,8 @@ def create_todo_task(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depe
         db.execute("INSERT INTO todo_items (list_id, context, completed) VALUES (?, ?, ?)",
                    [list_id, user.context, user.completed])
 
-        return JSONResponse(content={"message": "Task inserted successfully"}, status_code=status.HTTP_201_CREATED)
+        return JSONResponse(content={"message": "Task inserted successfully"},
+                            status_code=status.HTTP_201_CREATED)
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
