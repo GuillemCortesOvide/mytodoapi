@@ -1,11 +1,14 @@
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.responses import JSONResponse
-from app.db_operations import User, ToDoList, ToDoTask
 import sqlite3
+from .DBoperations import User, ToDoList, ToDoTask
 from sqlite_utils import Database
 import hashlib
 
-DATABASE_URL = "my_test_todo.db"
+
+DATABASE_URL = 'data/my_todo.db'
+
+
 my_db = Database(DATABASE_URL)
 app = FastAPI()
 
@@ -28,7 +31,6 @@ def hash_password(password: str) -> str:
 
 
 # Users Realm -----------------------------------------
-
 
 # Get All Users
 @app.get("/users", status_code=status.HTTP_200_OK)
@@ -77,7 +79,8 @@ def create_user(user: User, db: sqlite3.Connection = Depends(get_db)):
 
         user_id = db.lastrowid
 
-        return JSONResponse(content={"user_id": user_id, "message": "User created successfully"}, status_code=status.HTTP_201_CREATED)
+        return JSONResponse(content={"user_id": user_id, "message": "User created successfully"},
+                            status_code=status.HTTP_201_CREATED)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
@@ -176,7 +179,8 @@ def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection =
 
         list_id = db.lastrowid
 
-        return JSONResponse(content={"list_id":f"{list_id}", "message": "List created successfully"}, status_code=status.HTTP_201_CREATED)
+        return JSONResponse(content={"list_id": f"{list_id}", "message": "List created successfully"},
+                            status_code=status.HTTP_201_CREATED)
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

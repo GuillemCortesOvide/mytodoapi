@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Refactor tests: Fix on every realm except for todo-tasks still fail">
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="All tests pass. What a sweet and sour journey.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/my_test_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/my_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/test_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/db_operations.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_todo.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/my_todo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_test_todo.sqbpro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_todo.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,43 +55,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_main.test_create_user.executor": "Run",
-    "Python tests.Python tests for test_main.test_delete_user.executor": "Run",
-    "Python tests.Python tests for test_main.test_get_users.executor": "Run",
-    "Python tests.Run Tests.executor": "Run",
-    "Python tests.pytest for test_main.test_client.executor": "Run",
-    "Python tests.pytest for test_main.test_create_list.executor": "Run",
-    "Python tests.pytest for test_main.test_create_task.executor": "Run",
-    "Python tests.pytest for test_main.test_create_user.executor": "Run",
-    "Python tests.pytest for test_main.test_db_session.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_list.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_task.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_user.executor": "Run",
-    "Python tests.pytest for test_main.test_get_lists.executor": "Run",
-    "Python tests.pytest for test_main.test_get_tasks.executor": "Run",
-    "Python tests.pytest for test_main.test_get_users.executor": "Run",
-    "Python tests.pytest for test_main.test_update_list.executor": "Run",
-    "Python tests.pytest for test_main.test_update_task.executor": "Run",
-    "Python tests.pytest for test_main.test_update_user.executor": "Run",
-    "Python tests.pytest in test_main.py.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.uvicorn.exe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/guillem.cortes/PycharmProjects/mytodoapi",
-    "settings.editor.selected.configurable": "configurable.group.project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_main.test_create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.test_delete_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.test_get_users.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Run Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_client.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_db_session.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_lists.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_tasks.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_users.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in test_main.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.uvicorn.exe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/guillem.cortes/PycharmProjects/mytodoapi&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi" />
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Run Tests">
+  <component name="RunManager" selected="Python tests.pytest for test_main.test_db_session">
     <configuration name="Run Tests" type="tests" factoryName="py.test">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -108,7 +110,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_main.test_get_lists" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_main.test_create_user" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -121,7 +123,41 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_get_lists&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_create_user&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_main.test_db_session" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="mytodoapi" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests Folder" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_db_session&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_main.test_delete_user" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="mytodoapi" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_delete_user&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -139,40 +175,6 @@
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_main.test_get_users&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_main.test_update_list" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="mytodoapi" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_update_list&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_main.test_update_task" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="mytodoapi" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_update_task&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -212,21 +214,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.pytest for " />
       <item itemvalue="Python tests.Run Tests" />
+      <item itemvalue="Python tests.pytest for " />
+      <item itemvalue="Python tests.pytest for test_main.test_create_user" />
+      <item itemvalue="Python tests.pytest for test_main.test_db_session" />
+      <item itemvalue="Python tests.pytest for test_main.test_delete_user" />
       <item itemvalue="Python tests.pytest for test_main.test_get_users" />
-      <item itemvalue="Python tests.pytest for test_main.test_update_list" />
-      <item itemvalue="Python tests.pytest for test_main.test_update_task" />
-      <item itemvalue="Python tests.pytest for test_main.test_get_lists" />
       <item itemvalue="Python tests.pytest for test_main.test_update_user" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test_main.test_get_users" />
-        <item itemvalue="Python tests.pytest for test_main.test_update_list" />
-        <item itemvalue="Python tests.pytest for test_main.test_update_task" />
+        <item itemvalue="Python tests.pytest for test_main.test_db_session" />
+        <item itemvalue="Python tests.pytest for test_main.test_delete_user" />
         <item itemvalue="Python tests.pytest for test_main.test_update_user" />
-        <item itemvalue="Python tests.pytest for test_main.test_get_lists" />
+        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
+        <item itemvalue="Python tests.pytest for test_main.test_get_users" />
       </list>
     </recent_temporary>
   </component>
@@ -358,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708011582278</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="All tests pass. What a sweet and sour journey.">
+      <option name="closed" value="true" />
+      <created>1708095639162</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1708095639162</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -385,7 +395,8 @@
     <MESSAGE value="Refactor confusing endpoints, comment endpoints and JSON structures" />
     <MESSAGE value="Refactor tests add uuid on testing" />
     <MESSAGE value="Refactor tests: Fix on every realm except for todo-tasks still fail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor tests: Fix on every realm except for todo-tasks still fail" />
+    <MESSAGE value="All tests pass. What a sweet and sour journey." />
+    <option name="LAST_COMMIT_MESSAGE" value="All tests pass. What a sweet and sour journey." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
