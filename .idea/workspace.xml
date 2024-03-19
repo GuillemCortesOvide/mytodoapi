@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Update code for Docker file and database consistency">
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Update tests file and clean database old records">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests Folder/my_test_todo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests Folder/my_todo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/test_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_todo.db-journal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_todo.sqbpro" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.sqbpro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_todo.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +378,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710772738708</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Update tests file and clean database old records">
+      <option name="closed" value="true" />
+      <created>1710846626744</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1710846626744</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update tests file and clean database old records">
+      <option name="closed" value="true" />
+      <created>1710846694979</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1710846694979</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -411,7 +423,8 @@
     <MESSAGE value="Refactor tests: Fix on every realm except for todo-tasks still fail" />
     <MESSAGE value="All tests pass. What a sweet and sour journey." />
     <MESSAGE value="Update code for Docker file and database consistency" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update code for Docker file and database consistency" />
+    <MESSAGE value="Update tests file and clean database old records" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update tests file and clean database old records" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
