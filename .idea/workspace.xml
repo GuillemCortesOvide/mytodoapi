@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="All tests pass. What a sweet and sour journey.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="Update code for Docker file and database consistency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/db_operations.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/my_todo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_test_todo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_test_todo.sqbpro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/my_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests Folder/my_test_todo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests Folder/my_todo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests Folder/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests Folder/test_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.db-journal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.sqbpro" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.sqbpro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +89,7 @@
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_main.test_db_session">
+  <component name="RunManager" selected="Python tests.Run Tests">
     <configuration name="Run Tests" type="tests" factoryName="py.test">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -224,10 +222,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
         <item itemvalue="Python tests.pytest for test_main.test_db_session" />
         <item itemvalue="Python tests.pytest for test_main.test_delete_user" />
         <item itemvalue="Python tests.pytest for test_main.test_update_user" />
-        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
         <item itemvalue="Python tests.pytest for test_main.test_get_users" />
       </list>
     </recent_temporary>
@@ -368,7 +366,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708095639162</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Update code for Docker file and database consistency">
+      <option name="closed" value="true" />
+      <created>1710770195246</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710770195246</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Update code for Docker file and database consistency">
+      <option name="closed" value="true" />
+      <created>1710772738708</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710772738708</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -396,7 +410,8 @@
     <MESSAGE value="Refactor tests add uuid on testing" />
     <MESSAGE value="Refactor tests: Fix on every realm except for todo-tasks still fail" />
     <MESSAGE value="All tests pass. What a sweet and sour journey." />
-    <option name="LAST_COMMIT_MESSAGE" value="All tests pass. What a sweet and sour journey." />
+    <MESSAGE value="Update code for Docker file and database consistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update code for Docker file and database consistency" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

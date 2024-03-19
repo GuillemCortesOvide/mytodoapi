@@ -35,7 +35,7 @@ def get_sample_task():
 
 
 def test_db_session():
-    connection = sqlite3.connect("my_test_todo.db")
+    connection = sqlite3.connect("data/my_test_todo.db")
     cursor = connection.cursor()
     try:
         return cursor
