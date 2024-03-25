@@ -30,8 +30,4 @@ EXPOSE 8000
 CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
-# erase pycache (done)
-# clear db's and place it outside the app directory (done)
-# erase create a function on
-# look for a function on FastAPI that redirects / endpoints
-# correct the get all todo items endpoint
+

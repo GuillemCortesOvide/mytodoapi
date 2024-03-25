@@ -1,16 +1,43 @@
-from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi import FastAPI, HTTPException, status, Depends, Request
 from fastapi.responses import JSONResponse
 import sqlite3
 from .DBoperations import User, ToDoList, ToDoTask
 from sqlite_utils import Database
 import hashlib
 
-
 DATABASE_URL = 'data/my_todo.db'
-
 
 my_db = Database(DATABASE_URL)
 app = FastAPI()
+
+
+# This function redirects the requests in case the users adds "/" at the end of the endpoints
+@app.middleware("http")
+async def remove_trailing_slash(request: Request, call_next):
+
+    if request.url.path == "/users/":
+
+        return JSONResponse(
+            status_code=301,
+            content={"message": "Moved Permanently", "location": "/users"}
+        )
+
+    if request.url.path == "/todo-lists/":
+
+        return JSONResponse(
+            status_code=301,
+            content={"message": "Moved Permanently", "location": "/todo-lists"}
+        )
+
+    if request.url.path == "/todo-items/":
+
+        return JSONResponse(
+            status_code=301,
+            content={"message": "Moved Permanently", "location": "/todo-items"}
+        )
+
+    response = await call_next(request)
+    return response
 
 
 def get_db():
@@ -152,7 +179,7 @@ def get_all_todo_lists(db: sqlite3.Connection = Depends(get_db)):
 
 # Get Specific List
 @app.get("/todo-lists/{list_id}", status_code=status.HTTP_200_OK)
-def get_all_todo_lists(list_id: int, db: sqlite3.Connection = Depends(get_db)):
+def get_a_specific_todo_list(list_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
         cursor = db.execute(
             "SELECT todo_lists.id AS list_id, todo_lists.title AS list_title, users.id AS user_id, users.username "
@@ -261,32 +288,27 @@ def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# Get Tasks from a specific list
-@app.get("/todo-items/{list_id}", status_code=status.HTTP_200_OK)
-def get_todo_tasks(list_id: int, db: sqlite3.Connection = Depends(get_db)):
+# Get specific task by task_id
+@app.get("/todo-items/{task_id}", status_code=status.HTTP_200_OK)
+def get_specific_task(task_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
         cursor = db.execute(
-            "SELECT todo_items.id AS todo_task_id, todo_items.list_id AS list_id, "
-            "todo_lists.title AS title, "
-            "todo_items.context AS task, todo_items.completed AS status "
+            "SELECT todo_items.id AS task_id, todo_items.list_id, todo_items.context AS title, "
+            "todo_items.completed AS completed "
             "FROM todo_items "
-            "JOIN todo_lists ON todo_items.list_id = todo_lists.id "
-            "WHERE todo_items.list_id = ?;", [list_id])
+            "WHERE todo_items.id = ?;", (task_id,))
+        todo_items = cursor.fetchone()
+        if todo_items is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
 
-        tasks = cursor.fetchall()
+        structured_task = {
+            "task_id": todo_items[0],
+            "list_id": todo_items[1],
+            "task": todo_items[2],
+            "completed": todo_items[3]
+        }
 
-        structured_tasks = [
-            {
-                "task_id": task[0],
-                "list_id": task[1],
-                "title": task[2],
-                "context": task[3],
-                "completed": task[4],
-            }
-            for task in tasks
-        ]
-
-        return JSONResponse(content={"specific_task": structured_tasks}, status_code=status.HTTP_200_OK)
+        return JSONResponse(content={"specific_task": structured_task}, status_code=status.HTTP_200_OK)
 
     except Exception as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}

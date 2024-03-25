@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="clean Docker files">
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="clean database erase py_cache">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_test_todo.sqbpro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_todo.sqbpro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +86,7 @@
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Run Tests">
+  <component name="RunManager" selected="Python tests.pytest for test_main.test_db_session">
     <configuration name="Run Tests" type="tests" factoryName="py.test">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -129,7 +128,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests Folder" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -220,8 +219,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
         <item itemvalue="Python tests.pytest for test_main.test_db_session" />
+        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
         <item itemvalue="Python tests.pytest for test_main.test_delete_user" />
         <item itemvalue="Python tests.pytest for test_main.test_update_user" />
         <item itemvalue="Python tests.pytest for test_main.test_get_users" />
@@ -412,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710849090337</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="clean database erase py_cache">
+      <option name="closed" value="true" />
+      <created>1711368079157</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711368079157</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -444,7 +451,8 @@
     <MESSAGE value="Update tests file and clean database old records" />
     <MESSAGE value="clean database old records part 2" />
     <MESSAGE value="clean Docker files" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean Docker files" />
+    <MESSAGE value="clean database erase py_cache" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean database erase py_cache" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
