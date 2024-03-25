@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="clean database old records part 2" />
+    <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="clean Docker files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_test_todo.sqbpro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.sqbpro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -398,7 +404,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710847956777</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="clean Docker files">
+      <option name="closed" value="true" />
+      <created>1710849090337</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1710849090337</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,7 +443,8 @@
     <MESSAGE value="Update code for Docker file and database consistency" />
     <MESSAGE value="Update tests file and clean database old records" />
     <MESSAGE value="clean database old records part 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean database old records part 2" />
+    <MESSAGE value="clean Docker files" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean Docker files" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

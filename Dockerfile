@@ -5,7 +5,6 @@ FROM python:3.11-slim
 RUN apt-get update && \
     apt-get install -y build-essential libaio1 && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
 WORKDIR /app
@@ -31,5 +30,8 @@ EXPOSE 8000
 CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
-# investigar diff entre copy y add comandos
-# alojar base de datos del client por default
+# erase pycache (done)
+# clear db's and place it outside the app directory (done)
+# erase create a function on
+# look for a function on FastAPI that redirects / endpoints
+# correct the get all todo items endpoint
