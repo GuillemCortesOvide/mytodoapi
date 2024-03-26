@@ -2,9 +2,9 @@
 FROM python:3.11-slim
 
 # Install build-essential (includes gcc) and other necessary packages
-RUN apt-get update && \
-    apt-get install -y build-essential libaio1 && \
-    apt-get clean && \
+RUN apt-get update
+RUN apt-get install -y build-essential libaio1
+RUN apt-get clean
 
 # Set the working directory to /app
 WORKDIR /app
