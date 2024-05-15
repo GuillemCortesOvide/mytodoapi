@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="correct dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DBoperations.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DBoperations.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

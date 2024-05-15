@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, status, Depends, Request
 from fastapi.responses import JSONResponse
 import sqlite3
-from .DBoperations import User, ToDoList, ToDoTask
+from .DBoperations import User, ToDoList, ToDoTask, DelUser
 from sqlite_utils import Database
 import hashlib
 import os
@@ -167,9 +167,10 @@ def update_user(user_id: int, user: User, db: sqlite3.Connection = Depends(get_d
 
 
 # Delete Specific User
-@app.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(user_id: int, db: sqlite3.Connection = Depends(get_db)):
+@app.delete("/users", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(user: DelUser, db: sqlite3.Connection = Depends(get_db)):
     try:
+        user_id = user.user_id
         # Delete tasks associated with the user
         db.execute("DELETE FROM todo_items WHERE list_id IN (SELECT id FROM todo_lists WHERE user_id = ?)", [user_id])
 
@@ -232,7 +233,7 @@ def get_a_specific_todo_list(list_id: int, db: sqlite3.Connection = Depends(get_
 
 # Create a New List to a specific user
 @app.post("/todo-lists", status_code=status.HTTP_201_CREATED)
-def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection = Depends(get_db)):
+def create_todo_list(todo_list: ToDoList, db: sqlite3.Connection = Depends(get_db)):
     try:
 
         db.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [todo_list.user_id, todo_list.title])
