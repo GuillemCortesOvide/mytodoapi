@@ -1,12 +1,21 @@
 import sqlite3
-from fastapi.testclient import TestClient
-from app.main import app
 import pytest
 import uuid
+from app.main import app
+from fastapi.testclient import TestClient
+
+TEST_DATABASE_URL = 'data/my_test_todo.db'
 
 client = TestClient(app)
 
 
+# Override get_db dependency for testing
+@pytest.fixture(autouse=True)
+def override_get_db(monkeypatch):
+    monkeypatch.setattr("app.main.get_db", lambda: sqlite3.connect(TEST_DATABASE_URL))
+
+
+# Define a fixture to generate a sample user
 @pytest.fixture
 def get_sample_user():
     unique_id = str(uuid.uuid4())[:8]
@@ -17,6 +26,7 @@ def get_sample_user():
     }
 
 
+# Define a fixture to generate a sample list
 @pytest.fixture
 def get_sample_list():
     unique_id = str(uuid.uuid4())[:8]
@@ -25,6 +35,7 @@ def get_sample_list():
     }
 
 
+# Define a fixture to generate a sample task
 @pytest.fixture
 def get_sample_task():
     unique_id = str(uuid.uuid4())[:8]
@@ -34,14 +45,40 @@ def get_sample_task():
     }
 
 
+# Test the database session
 def test_db_session():
-    connection = sqlite3.connect("data/my_test_todo.db")
+    connection = sqlite3.connect(TEST_DATABASE_URL)
     cursor = connection.cursor()
     try:
         return cursor
+
     finally:
         connection.cursor()
         connection.close()
+
+
+# Test the initialization of the database
+def test_initialize_db():
+    connection = sqlite3.connect(TEST_DATABASE_URL)
+    cursor = connection.cursor()
+
+    # Check if the users table exists
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users';")
+    users_table = cursor.fetchone()
+    assert users_table is not None, "users table should exist"
+
+    # Check if the todo_lists table exists
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='todo_lists';")
+    todo_lists_table = cursor.fetchone()
+    assert todo_lists_table is not None, "todo_lists table should exist"
+
+    # Check if the todo_items table exists
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='todo_items';")
+    todo_items_table = cursor.fetchone()
+    assert todo_items_table is not None, "todo_items table should exist"
+
+    # Cleanup
+    connection.close()
 
 
 # User Realm Tests ---------------------------------

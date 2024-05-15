@@ -4,33 +4,66 @@ import sqlite3
 from .DBoperations import User, ToDoList, ToDoTask
 from sqlite_utils import Database
 import hashlib
+import os
 
-DATABASE_URL = 'data/my_todo.db'
+DATABASE_URL = os.getenv("DATABASE_URL", "data/todo.db")
+
+# create the database directory if it does not exist
+
+os.makedirs(os.path.dirname(DATABASE_URL), exist_ok=True)
 
 my_db = Database(DATABASE_URL)
 app = FastAPI()
 
 
+def initialize_db():
+    with sqlite3.connect(DATABASE_URL) as connection:
+        cursor = connection.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY,
+                username TEXT NOT NULL,
+                email TEXT NOT NULL,
+                password TEXT NOT NULL
+            );
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS todo_lists (
+                id INTEGER PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                title TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            );
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS todo_items (
+                id INTEGER PRIMARY KEY,
+                list_id INTEGER NOT NULL,
+                context TEXT NOT NULL,
+                completed BOOLEAN NOT NULL,
+                FOREIGN KEY (list_id) REFERENCES todo_lists (id)
+            );
+        """)
+        connection.commit()
+    initialize_db()
+
+
 # This function redirects the requests in case the users adds "/" at the end of the endpoints
 @app.middleware("http")
 async def remove_trailing_slash(request: Request, call_next):
-
     if request.url.path == "/users/":
-
         return JSONResponse(
             status_code=301,
             content={"message": "Moved Permanently", "location": "/users"}
         )
 
     if request.url.path == "/todo-lists/":
-
         return JSONResponse(
             status_code=301,
             content={"message": "Moved Permanently", "location": "/todo-lists"}
         )
 
     if request.url.path == "/todo-items/":
-
         return JSONResponse(
             status_code=301,
             content={"message": "Moved Permanently", "location": "/todo-items"}

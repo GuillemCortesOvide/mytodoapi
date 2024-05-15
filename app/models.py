@@ -9,7 +9,7 @@ def create_database():
         "username": str,
         "email": str,
         "password": str
-    }, pk="id")  # Specify 'id' as the primary key
+    }, pk="id")
 
     db["todo_lists"].create({
         "id": int,
