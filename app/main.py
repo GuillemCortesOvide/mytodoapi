@@ -6,7 +6,7 @@ from sqlite_utils import Database
 import hashlib
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "data/todo.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "data/my_todo.db")
 
 # create the database directory if it does not exist
 
@@ -231,11 +231,11 @@ def get_a_specific_todo_list(list_id: int, db: sqlite3.Connection = Depends(get_
 
 
 # Create a New List to a specific user
-@app.post("/todo-lists/{user_id}", status_code=status.HTTP_201_CREATED)
+@app.post("/todo-lists", status_code=status.HTTP_201_CREATED)
 def create_todo_list(user_id: int, todo_list: ToDoList, db: sqlite3.Connection = Depends(get_db)):
     try:
 
-        db.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [user_id, todo_list.title])
+        db.execute("INSERT INTO todo_lists (user_id, title) VALUES ( ?, ?)", [todo_list.user_id, todo_list.title])
 
         list_id = db.lastrowid
 

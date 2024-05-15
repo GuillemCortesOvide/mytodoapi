@@ -1,5 +1,6 @@
 from sqlite_utils import Database
 
+
 def create_database():
     db = Database("my_todo.db")
 
