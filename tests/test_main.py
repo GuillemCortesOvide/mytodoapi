@@ -1,6 +1,6 @@
 import sqlite3
-import pytest
 import uuid
+import pytest
 from app.main import app
 from fastapi.testclient import TestClient
 
@@ -12,7 +12,7 @@ client = TestClient(app)
 # Override get_db dependency for testing
 @pytest.fixture(autouse=True)
 def override_get_db(monkeypatch):
-    monkeypatch.setattr("app.main.get_db", lambda: sqlite3.connect(TEST_DATABASE_URL))
+    monkeypatch.setattr("app.database_utils.get_db", lambda: sqlite3.connect(TEST_DATABASE_URL))
 
 
 # Define a fixture to generate a sample user
@@ -200,6 +200,9 @@ def test_update_list(get_sample_user, get_sample_list):
 def test_create_task(get_sample_user, get_sample_list, get_sample_task):
     # Create a user
     user_response = client.post("/users", json=get_sample_user)
+
+    print(user_response.content.decode("utf-8"))
+
     assert user_response.status_code == 201
 
     # Get the user_id from the created user
