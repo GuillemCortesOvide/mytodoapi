@@ -13,7 +13,6 @@ class ToDoList(BaseModel):
 
 
 class ToDoTask(BaseModel):
-    list_id: int
     context: str
     completed: int
 

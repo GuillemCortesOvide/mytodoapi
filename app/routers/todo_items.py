@@ -7,7 +7,6 @@ import sqlite3
 router = APIRouter()
 
 
-
 @router.get("/todo-items", status_code=status.HTTP_200_OK)
 def get_todo_tasks(db: sqlite3.Connection = Depends(get_db)):
     try:
