@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "~=0.109.0"
+uvicorn = "*"
+sqlite-utils = "*"
+pydantic = "~=2.5.3"
+pytest = "~=7.4.4"
+cx-oracle = "==8.3.0"
+psycopg2-binary = "==2.9.9"
+httpx = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
+python_full_version = "3.12.1"

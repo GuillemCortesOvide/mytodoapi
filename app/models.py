@@ -1,28 +1,22 @@
-from sqlite_utils import Database
+from pydantic import BaseModel
 
 
-def create_database():
-    db = Database("my_todo.db")
+class User(BaseModel):
+    username: str
+    email: str
+    password: str
 
-    # Define tables and their columns here
-    db["users"].create({
-        "id": int,
-        "username": str,
-        "email": str,
-        "password": str
-    }, pk="id")
 
-    db["todo_lists"].create({
-        "id": int,
-        "user_id": int,
-        "title": str
-    })
+class ToDoList(BaseModel):
+    user_id: int
+    title: str
 
-    db["todo_items"].create({
-        "id": int,
-        "list_id": int,
-        "content": str,
-        "completed": bool
-    })
 
-    db.close()
+class ToDoTask(BaseModel):
+    list_id: int
+    context: str
+    completed: int
+
+
+class DeleteUser(BaseModel):
+    user_id: int
