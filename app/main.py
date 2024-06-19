@@ -1,21 +1,21 @@
-from fastapi import Request, FastAPI
+import os
+from fastapi import Request
 from app.app_instance import app
 from fastapi.responses import JSONResponse
-from sqlite_utils import Database
-from app.config import DATABASE_URL
-import os
 from app.routers import users, todo_lists, todo_items
 
-
-my_db = Database(DATABASE_URL)
 
 app.include_router(users.router)
 app.include_router(todo_lists.router)
 app.include_router(todo_items.router)
 
-# create the database directory if it does not exist
+# Load DATABASE_URL from environment variables
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./data/my_todo.db")
 
-os.makedirs(os.path.dirname(DATABASE_URL), exist_ok=True)
+# Ensure directories exist if using SQLite
+if DATABASE_URL.startswith("sqlite:///"):
+    db_path = DATABASE_URL.replace("sqlite:///", "")
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
 
 
 # This function redirects the requests in case the users adds "/" at the end of the endpoints

@@ -9,6 +9,7 @@ router = APIRouter()
 
 @router.get("/users", status_code=status.HTTP_200_OK)
 def get_users(db: sqlite3.Connection = Depends(get_db)):
+
     try:
         cursor = db
         cursor.execute("SELECT id, username, email FROM users")
