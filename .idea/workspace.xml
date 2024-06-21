@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="correct dockerfile">
-      <change afterPath="$PROJECT_DIR$/tests/test_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_todo.sqbpro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/todo.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/data/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data/my_test_todo.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/my_todo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +102,7 @@
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_main.test_initialize_test_db">
+  <component name="RunManager" selected="Python tests.pytest for test_main.test_delete_user (1)">
     <configuration name="Run Tests" type="tests" factoryName="py.test">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -125,23 +119,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_main.test_create_list" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="mytodoapi" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_create_list&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest for test_main.test_create_user" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -161,7 +138,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_main.test_db_session (1)" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_main.test_db_session" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -175,6 +152,23 @@
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_main.test_db_session&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_main.test_delete_user (1)" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="mytodoapi" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_delete_user&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -212,7 +206,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_main.test_initialize_test_db" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_main.test_update_user" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -225,7 +219,7 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_main.test_initialize_test_db&quot;" />
+      <option name="_new_target" value="&quot;test_main.test_update_user&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -251,19 +245,19 @@
       <item itemvalue="Python tests.pytest for test_main.test_delete_user" />
       <item itemvalue="Python tests.Run Tests" />
       <item itemvalue="Python tests.pytest for " />
-      <item itemvalue="Python tests.pytest for test_main.test_initialize_test_db" />
-      <item itemvalue="Python tests.pytest for test_main.test_create_list" />
-      <item itemvalue="Python tests.pytest for test_main.test_db_session (1)" />
-      <item itemvalue="Python tests.pytest for test_main.test_get_users" />
       <item itemvalue="Python tests.pytest for test_main.test_create_user" />
+      <item itemvalue="Python tests.pytest for test_main.test_db_session" />
+      <item itemvalue="Python tests.pytest for test_main.test_delete_user (1)" />
+      <item itemvalue="Python tests.pytest for test_main.test_update_user" />
+      <item itemvalue="Python tests.pytest for test_main.test_get_users" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test_main.test_initialize_test_db" />
-        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
-        <item itemvalue="Python tests.pytest for test_main.test_create_list" />
+        <item itemvalue="Python tests.pytest for test_main.test_delete_user (1)" />
+        <item itemvalue="Python tests.pytest for test_main.test_update_user" />
         <item itemvalue="Python tests.pytest for test_main.test_get_users" />
-        <item itemvalue="Python tests.pytest for test_main.test_db_session (1)" />
+        <item itemvalue="Python tests.pytest for test_main.test_create_user" />
+        <item itemvalue="Python tests.pytest for test_main.test_db_session" />
       </list>
     </recent_temporary>
   </component>
@@ -516,15 +510,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="correct dockerfile" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/routers/users.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="args" />
