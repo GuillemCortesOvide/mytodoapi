@@ -82,10 +82,9 @@ def update_user(user_id: int, user: User, db: sqlite3.Connection = Depends(get_d
 
 
 # Delete Specific User
-@router.delete("/users", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(user: DeleteUser, db: sqlite3.Connection = Depends(get_db)):
+@router.delete("/users/{user_id}", status_code=status.HTTP_200_OK)
+def delete_user(user_id: int, db: sqlite3.Connection = Depends(get_db)):
     try:
-        user_id = user.user_id
         # Delete tasks associated with the user
         db.execute("DELETE FROM todo_items WHERE list_id IN (SELECT id FROM todo_lists WHERE user_id = ?)", [user_id])
 
@@ -97,8 +96,8 @@ def delete_user(user: DeleteUser, db: sqlite3.Connection = Depends(get_db)):
 
         if result.rowcount == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-        return JSONResponse(content={"message": "User and all related data deleted"}, status_code=status.HTTP_200_OK)
 
+        return JSONResponse(content={"message": "User deleted successfully"}, status_code=status.HTTP_200_OK)
     except sqlite3.Error as e:
         error_detail = {"error": "Internal Server Error", "details": str(e)}
         return JSONResponse(content=error_detail, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -154,9 +154,16 @@ def test_create_list(get_sample_list, get_sample_user):
     # Extract the user_id from the created user
     user_id = create_user_response.json().get("user_id")
 
+    # Use the get_sample_list fixture and add the user_id to the payload
+    sample_list = get_sample_list
+    sample_list["user_id"] = user_id
+
     # Create a to-do list for the user
-    list_response = client.post(f"/todo-lists/{user_id}", json=get_sample_list)
+    list_response = client.post("/todo-lists", json=sample_list)
     assert list_response.status_code == 201
+    assert "list_id" in list_response.json()
+    assert "message" in list_response.json()
+    assert list_response.json()["message"] == "List created successfully"
 
 
 def test_delete_list(get_sample_user):
@@ -194,17 +201,35 @@ def test_update_list(get_sample_user, get_sample_list):
     # Get the user_id from the created user
     user_id = user_response.json().get("user_id")
 
+    # Use the get_sample_list fixture and add the user_id to the payload
+    sample_list = get_sample_list
+    sample_list["user_id"] = user_id
+
     # Create a list for the user
-    list_response = client.post(f"/todo-lists/{user_id}", json=get_sample_list)
+    list_response = client.post("/todo-lists", json=sample_list)
     assert list_response.status_code == 201
 
     # Get the list_id from the created list
     list_id = list_response.json().get("list_id")
 
-    updated_data = get_sample_list
+    # Prepare updated data
+    updated_data = {
+        "title": f"Updated {sample_list['title']}",
+        "user_id": user_id  # Add user_id to the update payload if required by your API
+    }
 
-    list_update = client.put(f"/todo-lists/{list_id}", json=updated_data)
-    assert list_update.status_code == 201
+    # Update the list
+    list_update_response = client.put(f"/todo-lists/{list_id}", json=updated_data)
+    assert list_update_response.status_code == 201  # Ensure the correct status code for update
+
+    # Verify the update
+    response_data = list_update_response.json()
+    assert response_data["message"] == "List updated successfully"
+    # If you return the updated list in the response, also check for updated data
+    updated_list = response_data.get("list")
+    if updated_list:
+        assert updated_list["title"] == updated_data["title"]
+        assert updated_list["user_id"] == updated_data["user_id"]
 
 
 # Tasks Realm Tests ---------------------------------
@@ -213,19 +238,19 @@ def test_create_task(get_sample_user, get_sample_list, get_sample_task):
     # Create a user
     user_response = client.post("/users", json=get_sample_user)
     assert user_response.status_code == 201
-
-    # Get the user_id from the created user
-    user_id = user_response.json().get("user_id")
+    user_id = user_response.json()["user_id"]
 
     # Create a list for the user
-    list_response = client.post(f"/todo-lists/{user_id}", json=get_sample_list)
+    list_data = get_sample_list
+    list_data["user_id"] = user_id  # Include user_id in the list data
+    list_response = client.post("/todo-lists", json=list_data)  # Adjust endpoint to handle list creation
     assert list_response.status_code == 201
+    list_id = list_response.json()["list_id"]
 
-    # Get the list_id from the created list
-    list_id = list_response.json().get("list_id")
-
-    # Create a task for the list
-    task_response = client.post(f"/todo-items/{list_id}/{user_id}", json=get_sample_task)
+    # Create a task for the list and user
+    task_data = get_sample_task
+    task_data["user_id"] = user_id  # Include user_id in the task data
+    task_response = client.post(f"/todo-items/{list_id}/{user_id}", json=task_data)
     assert task_response.status_code == 201
 
 
@@ -255,25 +280,32 @@ def test_get_tasks():
 
 
 def test_update_task(get_sample_user, get_sample_list, get_sample_task):
-    # Create a user
+    # Create user
     user_response = client.post("/users", json=get_sample_user)
     assert user_response.status_code == 201
+    user_id = user_response.json()["user_id"]
 
-    # Get the user_id from the created user
-    user_id = user_response.json().get("user_id")
-
-    # Create a list for the user
+    # Create list for user
     list_response = client.post(f"/todo-lists/{user_id}", json=get_sample_list)
     assert list_response.status_code == 201
+    list_id = list_response.json()["list_id"]
 
-    # Get the list_id from the created list
-    list_id = list_response.json().get("list_id")
-
-    # Create a task for the list
+    # Create task for list and user
     task_response = client.post(f"/todo-items/{list_id}/{user_id}", json=get_sample_task)
     assert task_response.status_code == 201
+    task_id = task_response.json()["task_id"]
 
-    updated_data = get_sample_task
+    # Prepare updated data for the task
+    updated_data = {
+        "task_id": task_id,  # Include task_id in the updated data
+        "completed": "1",
+        "context": "Updated Task"
+    }
 
-    task_update = client.put(f"/todo-items/{list_id}", json=updated_data)
-    assert task_update.status_code == 201
+    # Update the task using PUT method with task_id included in the URL
+    update_response = client.put(f"/todo-items/{list_id}/{user_id}", json=updated_data)
+    assert update_response.status_code == 201
+
+    # Verify the updated task details
+    updated_task = update_response.json()
+    assert updated_task["message"] == "Task updated successfully"

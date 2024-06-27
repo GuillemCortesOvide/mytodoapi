@@ -83,13 +83,12 @@ def create_todo_task(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depe
 
 
 # Update specific task from a list
-@router.put("/todo-items/{list_id}")
+@router.put("/todo-items/{list_id}/{user_id}")
 def update_user(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(get_db)):
     try:
+        existing_task = db.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,)).fetchone()
 
-        existing_user = db.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,)).fetchone()
-
-        if existing_user is None:
+        if existing_task is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
 
         db.execute("UPDATE todo_items SET context=?, completed=? WHERE list_id=?",
