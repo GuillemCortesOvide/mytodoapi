@@ -7,7 +7,6 @@
     <list default="true" id="254815d0-db73-40da-b233-a932e5fb1a4a" name="Changes" comment="correct dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routers/todo_items.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/todo_items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/my_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_todo.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/data/my_test_todo.db" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data/my_test_todo.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_main.py" afterDir="false" />
@@ -55,54 +54,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_main.test_create_user.executor": "Run",
-    "Python tests.Python tests for test_main.test_delete_user.executor": "Run",
-    "Python tests.Python tests for test_main.test_get_users.executor": "Run",
-    "Python tests.Run Tests.executor": "Run",
-    "Python tests.pytest for test_main.test_client.executor": "Run",
-    "Python tests.pytest for test_main.test_create_list.executor": "Run",
-    "Python tests.pytest for test_main.test_create_task.executor": "Run",
-    "Python tests.pytest for test_main.test_create_user (1).executor": "Run",
-    "Python tests.pytest for test_main.test_create_user.executor": "Run",
-    "Python tests.pytest for test_main.test_db_session (1).executor": "Run",
-    "Python tests.pytest for test_main.test_db_session (2).executor": "Run",
-    "Python tests.pytest for test_main.test_db_session.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_list.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_task.executor": "Run",
-    "Python tests.pytest for test_main.test_delete_user (1).executor": "Run",
-    "Python tests.pytest for test_main.test_delete_user.executor": "Run",
-    "Python tests.pytest for test_main.test_get_db (1).executor": "Run",
-    "Python tests.pytest for test_main.test_get_db.executor": "Run",
-    "Python tests.pytest for test_main.test_get_lists.executor": "Run",
-    "Python tests.pytest for test_main.test_get_tasks.executor": "Run",
-    "Python tests.pytest for test_main.test_get_users.executor": "Run",
-    "Python tests.pytest for test_main.test_initialize_db.executor": "Run",
-    "Python tests.pytest for test_main.test_initialize_test_db.executor": "Run",
-    "Python tests.pytest for test_main.test_override_get_db.executor": "Run",
-    "Python tests.pytest for test_main.test_print_db_location.executor": "Run",
-    "Python tests.pytest for test_main.test_update_list.executor": "Run",
-    "Python tests.pytest for test_main.test_update_task.executor": "Run",
-    "Python tests.pytest for test_main.test_update_user.executor": "Run",
-    "Python tests.pytest in test_main.py.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.script_cal_tickets.executor": "Run",
-    "Python.uvicorn.exe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/guillem.cortes/PycharmProjects/mytodoapi/tests",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_main.test_create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.test_delete_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_main.test_get_users.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Run Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_client.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_user (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_db_session (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_db_session (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_db_session.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_user (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_delete_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_db (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_lists.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_tasks.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_get_users.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_initialize_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_initialize_test_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_override_get_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_print_db_location.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for test_main.test_update_user.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in test_main.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.script_cal_tickets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.uvicorn.exe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/guillem.cortes/PycharmProjects/mytodoapi/tests&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi" />
       <recent name="C:\Users\guillem.cortes\PycharmProjects\mytodoapi\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_main.test_update_task">
+  <component name="RunManager" selected="Python tests.Run Tests">
     <configuration name="Run Tests" type="tests" factoryName="py.test">
       <module name="mytodoapi" />
       <option name="ENV_FILES" value="" />
@@ -254,9 +253,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.pytest for test_main.test_update_task" />
-        <item itemvalue="Python tests.pytest for test_main.test_get_tasks" />
-        <item itemvalue="Python tests.pytest for test_main.test_delete_task" />
         <item itemvalue="Python tests.pytest for test_main.test_create_task" />
+        <item itemvalue="Python tests.pytest for test_main.test_delete_task" />
+        <item itemvalue="Python tests.pytest for test_main.test_get_tasks" />
         <item itemvalue="Python tests.pytest for test_main.test_update_list" />
       </list>
     </recent_temporary>

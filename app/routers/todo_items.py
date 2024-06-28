@@ -83,7 +83,7 @@ def create_todo_task(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depe
 
 
 # Update specific task from a list
-@router.put("/todo-items/{list_id}/{user_id}")
+@router.put("/todo-items/{list_id}")
 def update_user(list_id: int, user: ToDoTask, db: sqlite3.Connection = Depends(get_db)):
     try:
         existing_task = db.execute("SELECT * FROM todo_items WHERE list_id=?", (list_id,)).fetchone()

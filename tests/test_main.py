@@ -285,27 +285,29 @@ def test_update_task(get_sample_user, get_sample_list, get_sample_task):
     assert user_response.status_code == 201
     user_id = user_response.json()["user_id"]
 
-    # Create list for user
-    list_response = client.post(f"/todo-lists/{user_id}", json=get_sample_list)
+    # Create list for user with user_id
+    get_sample_list["user_id"] = user_id
+    list_response = client.post("/todo-lists", json=get_sample_list)
+    if list_response.status_code != 201:
+        print(list_response.json())  # Print error details
     assert list_response.status_code == 201
     list_id = list_response.json()["list_id"]
 
     # Create task for list and user
     task_response = client.post(f"/todo-items/{list_id}/{user_id}", json=get_sample_task)
     assert task_response.status_code == 201
-    task_id = task_response.json()["task_id"]
 
     # Prepare updated data for the task
     updated_data = {
-        "task_id": task_id,  # Include task_id in the updated data
-        "completed": "1",
-        "context": "Updated Task"
+        "context": "Updated Task",
+        "completed": 1  # Make sure this matches the expected type (int)
     }
 
-    # Update the task using PUT method with task_id included in the URL
-    update_response = client.put(f"/todo-items/{list_id}/{user_id}", json=updated_data)
+    # Update the task
+    update_response = client.put(f"/todo-items/{list_id}", json=updated_data)
     assert update_response.status_code == 201
 
     # Verify the updated task details
     updated_task = update_response.json()
     assert updated_task["message"] == "Task updated successfully"
+
